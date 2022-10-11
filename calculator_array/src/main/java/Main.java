@@ -19,7 +19,7 @@ public class Main {
 
     public static void printReport(int arraySize, long singleTime, long parallelTime) {
         try (BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream("calculator_array/src/main/java/report/result.txt", true))) {
-            String fastestSum = singleTime < parallelTime ? " однопоточный " : " многопоточный ";
+            String fastestSum = singleTime <= parallelTime ? " однопоточный " : " многопоточный ";
             os.write(String.format("=====Тест массива из %d элементов===== %n", arraySize).getBytes(StandardCharsets.UTF_8));
             os.write(String.format("Время выполнения однопоточного подсчета: %d мс %n", singleTime).getBytes(StandardCharsets.UTF_8));
             os.write(String.format("Время выполнения многопоточного подсчета: %d мс %n", parallelTime).getBytes(StandardCharsets.UTF_8));
@@ -34,7 +34,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int[] arraysSizes = {100_000, 1_000_000, 10_000_000};
+        int[] arraysSizes = {1000_000, 10_000_000, 100_000_000};
         for (int size : arraysSizes) {
             calcSpeedTest(size);
         }
